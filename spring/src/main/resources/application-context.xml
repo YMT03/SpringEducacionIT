@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="primerBean" class="com.accenture.ieramos.spring.pojos.PrimerBeanImpl" lazy-init="true">
+		<property name="textoInicial" value="Hola a todos.." ></property>
+	</bean>
+	<bean id="primerBeanNoSingleton" class="com.accenture.ieramos.spring.pojos.PrimerBeanImplNoSingleton" scope="prototype"></bean>
+	<bean id="segundoBean" class="com.accenture.ieramos.spring.pojos.SegundoBeanImpl">
+		<property name="primerBean" ref="primerBean2"></property>
+	</bean>
+	
+	<bean id="primerBean2" class="com.accenture.ieramos.spring.pojos.PrimerBeanImpl2">
+		<property name="textoInicial" value="Hola a todos.. ojo que soy el 2 .."></property>
+	</bean>
+	
+	
+	<!-- Banco (Singleton) -->
+	<bean id="banco" class="com.accenture.ieramos.spring.ejercicio.Banco">
+		<constructor-arg value="BBVA Frances"></constructor-arg> <!-- Con ctor en vez de setter -->
+	<!-- <property name="nombre" value="BBVA Frances"></property> -->
+		<property name="cuentas">
+			<list>
+				<ref bean="cajaAhorro"></ref>
+				<ref bean="cuentaCorriente"></ref>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CajaAhorro (Prototype) -->
+	<bean id="cajaAhorro" class="com.accenture.ieramos.spring.ejercicio.CajaAhorro" scope="prototype">
+		<property name="saldo" value="15000"></property>
+		<property name="numero" value="2837283CA"></property>
+		<property name="notas">
+			<list>
+				<value>Nota 1</value>
+				<value>Nota 2</value>
+				<value>Nota 3</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CuentaCorriente (Prototype) -->
+	<bean id="cuentaCorriente" class="com.accenture.ieramos.spring.ejercicio.CuentaCorriente" scope="prototype">
+		<property name="limite" value="5000"></property>
+		<property name="saldo" value="3000"></property>
+		<property name="numero" value="12389213JKA"></property>
+		<property name="notas">
+			<list>
+				<value>Nota 4</value>
+				<value>Nota 5</value>
+				<value>Nota 6</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Chofer, seteo nombre -->
+	<bean id="choferImpl" class="com.accenture.ieramos.spring.annotations.ChoferImpl" scope="prototype">
+		<property name="nombre" value="Jorge"></property>
+	</bean>
+	<context:component-scan base-package="com.accenture.ieramos.spring.annotations"></context:component-scan>	
+</beans>

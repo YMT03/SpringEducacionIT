@@ -1,0 +1,34 @@
+ Dependencies basicas para Spring App:
+ - spring-core
+ - spring-context
+
+Configuracion Spring. 3 metodos.
+1. applicationcontext.xml (configuracion inicial proyecto) // No contamina codigo java con annotations
+2. Annotations
+3. Mixta
+
+Componentes - Beans
+Cada bean
+- Nombre
+- Ciclo de vida
+- Input/Output
+Dependencia de componentes/beans
+
+Scopes:
+-Singleton
+-Prototype (cada vez crea una instancia nueva)
+-Request (llamada, peticion, dura la request)
+-Session (dura la sesion del usuario)
+Todos thread safe, menos el singleton.. Interbloqueos por recursos. Hay que hacerlo thread-safe
+
+
+Inyeccion de Dependencias
+
+
+Libros
+- Pro Spring 5 - Apress
+- Spring 5 Recipes - Apress
+
+Pags
+- bealdung
+- mkyoung - ejemplos. no explicaciones.
