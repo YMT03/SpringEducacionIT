@@ -26,8 +26,14 @@ public class ProductoServiceImp implements ProductoService{
 		return producto.getId();
 	}
 
+	@Override
 	public List<Producto> getAll() {
 		return productoDAO.getAll();
+	}
+	
+	@Override
+	public Producto getById(long id) {
+		return productoDAO.getById(id);
 	}
 	
 	
