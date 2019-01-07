@@ -21,7 +21,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 		<property name="annotatedClasses">
 			<list>
-				<value>edu.curso.java.spring.bo.Producto</value>
+				<value>edu.curso.java.spring.model.Producto</value>
 			</list>
 		</property>
 
