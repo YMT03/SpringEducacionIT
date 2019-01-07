@@ -32,3 +32,29 @@ Libros
 Pags
 - bealdung
 - mkyoung - ejemplos. no explicaciones.
+
+
+SpringMVC
+
+
+Creamos un dynamic web project
+Despues clic derecho, configure, convertir a maven project. insertamos dependencias y configuraciones necesarias.
+
+WEB-INF no se puede acceder desde el navegador. (Van las paginas)
+Java Resources lleva las clases java
+
+
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+
+contiene la llamada al app context. no hay main
+
+dispatcher-servlet (estilo appcontext pero de springmvc)
+
+En RequestParam (parametros por url pagina.html?parametro=valor&otroparam=otrovalor)
+Pueden ser opcionales
+
+En PathVariable (parametros mandatorios en la url
+pagina/parametro.html)
