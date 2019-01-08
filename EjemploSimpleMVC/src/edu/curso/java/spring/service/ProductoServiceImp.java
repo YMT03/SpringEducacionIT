@@ -16,13 +16,11 @@ public class ProductoServiceImp implements ProductoService{
 	@Autowired
 	private ProductoDAO productoDAO;
 	
-	public long addProducto(Producto producto) throws ProductoException {
+	public long addProducto(Producto producto) {
 		double precioConIVA = producto.getPrecio() * 1.21;
 		producto.setPrecioConIVA(precioConIVA);
 		productoDAO.add(producto);
 		//Excepcion para probar el transactional.. Debera hacer rollback
-		if(producto.getPrecio()<0)
-		throw new ProductoException("El precio ingresado es incorrecto");
 		return producto.getId();
 	}
 
@@ -35,6 +33,29 @@ public class ProductoServiceImp implements ProductoService{
 	public Producto getById(long id) {
 		return productoDAO.getById(id);
 	}
+
+	@Override
+	public void removeById(long id) {
+		productoDAO.removeById(id);		
+	}
+
+	@Override
+	public void updateProducto(Producto producto) {
+		double precioConIVA = producto.getPrecio() * 1.21;
+		producto.setPrecioConIVA(precioConIVA);
+		productoDAO.update(producto);		
+	}
+
+	@Override
+	public List<Producto> getAllThatStartsWith(String nombre) {
+		return productoDAO.getAllThatStartsWith(nombre);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 

@@ -58,3 +58,12 @@ Pueden ser opcionales
 
 En PathVariable (parametros mandatorios en la url
 pagina/parametro.html)
+
+
+
+DataTransferObject
+Forms Spring
+
+path -> nombre de la property del objecto
+commandName -> para bindeo automatico. Lleva el nombre del objeto que se agrega con addAttribute (objeto que representa el form)
+

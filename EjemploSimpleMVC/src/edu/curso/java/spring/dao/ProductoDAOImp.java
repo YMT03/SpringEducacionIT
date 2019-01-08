@@ -34,6 +34,12 @@ public class ProductoDAOImp implements ProductoDAO{
 	public List<Producto> getAll() {
 		return sf.getCurrentSession().createQuery("from Producto").list();
 	}
+
+	@Override
+	public List<Producto> getAllThatStartsWith(String nombre) {
+		return sf.getCurrentSession().createQuery("from Producto p WHERE p.nombre LIKE '"+ nombre +"%'").list();
+	}
+	
 	
 	
 

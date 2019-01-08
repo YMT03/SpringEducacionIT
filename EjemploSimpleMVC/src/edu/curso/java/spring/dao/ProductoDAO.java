@@ -11,5 +11,6 @@ public interface ProductoDAO {
 	void removeById(long id);
 	Producto getById(long id);
 	List<Producto> getAll();
+	List<Producto> getAllThatStartsWith(String nombre);
 
 }
