@@ -3,6 +3,7 @@ package edu.curso.java.spring.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Producto {
@@ -13,7 +14,15 @@ public class Producto {
 	private String nombre;
 	private double precio;
 	private double precioConIVA;
+	@ManyToOne
+	private Categoria categoria;
 	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public Long getId() {
 		return id;
 	}

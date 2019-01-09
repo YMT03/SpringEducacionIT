@@ -14,7 +14,7 @@ public class ProductoDAOImp implements ProductoDAO{
 	@Autowired
 	private SessionFactory sf;
 	
-	public void add(Producto producto) {
+	public void save(Producto producto) {
 		sf.getCurrentSession().save(producto);
 	}
 

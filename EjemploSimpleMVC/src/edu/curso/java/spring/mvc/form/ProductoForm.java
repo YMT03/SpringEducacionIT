@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ProductoForm {
 	
 	private Long id;
+	private Long categoriaId;
 	@NotEmpty
 	@Size(min=1, max=100)
 	private String nombre;
@@ -16,6 +17,12 @@ public class ProductoForm {
 	@Digits(integer = 8, fraction = 2)
 	private double precio;
 	
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
+	}
 	public Long getId() {
 		return id;
 	}

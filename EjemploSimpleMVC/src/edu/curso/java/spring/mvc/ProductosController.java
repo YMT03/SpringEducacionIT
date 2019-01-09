@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.curso.java.spring.model.Categoria;
 import edu.curso.java.spring.model.Producto;
 import edu.curso.java.spring.mvc.form.ProductoForm;
 import edu.curso.java.spring.service.ProductoService;
@@ -23,6 +24,11 @@ public class ProductosController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	@ModelAttribute("categorias")
+	private List<Categoria> allCategorias(){
+		return productoService.findAllCategorias();
+	}
 
 	@RequestMapping(value="/listar", method = RequestMethod.GET)
 	public String listar(Model model) {
@@ -58,6 +64,7 @@ public class ProductosController {
 		productoForm.setId(id);
 		productoForm.setNombre(producto.getNombre());
 		productoForm.setPrecio(producto.getPrecio());
+		productoForm.setCategoriaId(producto.getCategoria().getId());
 		model.addAttribute("productoForm",productoForm);
 		return "/productos/form";
 	}
@@ -71,7 +78,6 @@ public class ProductosController {
 		return "/productos/form";
 	}
 	
-
 	@RequestMapping(value="/guardar", method = RequestMethod.POST)
 	public String guardar(@ModelAttribute("productoForm") @Valid ProductoForm productoForm,
 			BindingResult result, Model model) {
@@ -82,12 +88,12 @@ public class ProductosController {
 			Producto producto = new Producto();
 			producto.setNombre(productoForm.getNombre());
 			producto.setPrecio(productoForm.getPrecio());
-			productoService.addProducto(producto);			
+			productoService.save(producto, productoForm.getCategoriaId());			
 		} else {
 			Producto producto = productoService.getById(id);
 			producto.setNombre(productoForm.getNombre());
 			producto.setPrecio(productoForm.getPrecio());
-			productoService.updateProducto(producto);
+			productoService.updateProducto(producto, productoForm.getCategoriaId());
 		}
 		return "redirect:/productos/listar.html";
 	}

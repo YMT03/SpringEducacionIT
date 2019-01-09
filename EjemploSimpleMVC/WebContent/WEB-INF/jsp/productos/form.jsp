@@ -20,6 +20,13 @@
 				</td>
 			</tr>
 			<tr>
+				<td>Categoria</td>
+				<td>
+					<form:select path="categoriaId" items="${ categorias }" 
+					itemLabel="nombre" itemValue="id"/>
+				</td>
+			</tr>
+			<tr>
 				<td>Precio</td>
 				<td>
 					<form:input path="precio" />

@@ -11,6 +11,7 @@
 <body>
 	<h1>Producto <c:out value ="${producto.nombre}"></c:out></h1>
 	<h2>Descripcion del producto</h2>
+	<p>Categoria: <c:out value ="${producto.categoria.nombre}"></c:out></p>
 	<p>Precio: <fmt:formatNumber value = "${ producto.precio }" type="number"></fmt:formatNumber></p>
 	<p>Precio con IVA: <fmt:formatNumber value = "${ producto.precioConIVA }" type="number"></fmt:formatNumber></p>
 
