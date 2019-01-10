@@ -68,7 +68,6 @@ public class GenericDAOImp<E, K extends Serializable> implements GenericDAO<E, K
 
 	@Override
 	public Long contar() {
-		// TODO Auto-generated method stub
 		return (Long) sessionFactory.getCurrentSession().createQuery("select count(*) from " + entityClass.getName() + " obj").uniqueResult();
 	}
 		

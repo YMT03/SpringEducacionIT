@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jms="http://www.springframework.org/schema/jms"
-	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -19,16 +24,19 @@
 			http://www.springframework.org/schema/jms/spring-jms.xsd
 			http://cxf.apache.org/jaxws
 			http://cxf.apache.org/schemas/jaxws.xsd
+			http://www.springframework.org/schema/cache
+			http://www.springframework.org/schema/cache/spring-cache.xsd
 			http://www.springframework.org/schema/task
 			http://www.springframework.org/schema/task/spring-task.xsd">
 
 
-			<context:component-scan base-package="edu.curso.java.spring" />
+	<context:component-scan
+		base-package="edu.curso.java.spring" />
 
 
 	<import resource="dataSource.xml" />
 	<import resource="hibernate.xml" />
-    
+
 	<tx:annotation-driven />
 
 
@@ -37,8 +45,24 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
+	<task:annotation-driven executor="miExecutor"
+		scheduler="miScheduler" />
+	<task:executor id="miExecutor" pool-size="10" />
+	<task:scheduler id="miScheduler" pool-size="10" />
 
+	<cache:annotation-driven />
+
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache" />
+	</bean>
+
+	<bean id="ehcache"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+	</bean>
 
 </beans>
