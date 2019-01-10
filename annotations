@@ -67,3 +67,31 @@ Forms Spring
 path -> nombre de la property del objecto
 commandName -> para bindeo automatico. Lleva el nombre del objeto que se agrega con addAttribute (objeto que representa el form)
 
+
+Scheduling - Threads
+
+Quarts Framework
+
+Spring tiene su imp..
+@Scheduled
+
+Para ser scheduleable debe ser singleton
+
+@Async
+Para correr algo en paralelo.
+Ej el usuario quiere exportar una tabla grande
+Antes de proceder a procesar los datos se ejecuta un metodo async que le diga que en breve le estara llegando un mail y demas
+Mientras que continua haciendose en background la exportacion
+
+Cacheo capa acceso a datos
+Si uso hibernet utilizo el cache de hibernate
+Si utilizo jdbc u otro puedo utilizar cacheable de spring
+
+Cacheo a servicios
+Cacheo a controladores
+
+
+https://www.ehcache.org/ framework mas usado en java
+
+Testing JUnit
+Selenium
