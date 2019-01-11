@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- - Sample namespace-based configuration - -->
+
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+    <global-method-security pre-post-annotations="enabled"/>
+
+
+	<http auto-config="true">
+
+        <intercept-url pattern="/" access="permitAll" />
+        <!-- <intercept-url pattern="/productos/**" access="isAuthenticated()" /> -->
+		
+		<!-- 		<intercept-url pattern="/productos/**" access="hasAuthority('ROL_ADMIN')" />  -->
+
+		<form-login login-page="/login.jsp"
+			login-processing-url="/appLogin" username-parameter="app_username"
+			password-parameter="app_password"
+			default-target-url="/productos/listar.html" />
+		<access-denied-handler error-page="/denied-page.jsp" />
+	</http>
+
+
+	<authentication-manager>
+
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				authorities-by-username-query="SELECT user.userName as UserName, user.role as Authority FROM user
+					 WHERE user.userName = ?"
+
+				users-by-username-query="SELECT
+					  u.userName AS UserName,
+					  u.password AS Password,
+					  u.enabledUser AS Enabled
+					FROM
+					  user u
+					WHERE
+					  userName = ?"></jdbc-user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+
+
+</beans:beans>
